@@ -134,7 +134,7 @@ export default function PinActions({
 
       <button
         onClick={toggleSave}
-        className={`px-4 h-10 rounded-2xl text-[14px] font-semibold ${
+        className={`px-5 h-11 rounded-xl text-[15px] font-semibold ${
           saved ? "bg-ink text-white" : "bg-[#e60023] text-white hover:bg-[#ad081b]"
         }`}
       >
