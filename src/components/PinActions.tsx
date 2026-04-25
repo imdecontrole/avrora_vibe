@@ -69,7 +69,7 @@ export default function PinActions({
         <button
           onClick={toggleLike}
           aria-label="Нравится"
-          className="w-11 h-11 grid place-items-center rounded-full hover:bg-[#f1f1f1]"
+          className="flex items-center gap-1 h-11 px-1.5 rounded-full hover:bg-[#f1f1f1]"
         >
           <img
             src={liked ? "/icons/heart-active.svg" : "/icons/heart-default.svg"}
@@ -77,14 +77,16 @@ export default function PinActions({
             width={28}
             height={28}
           />
+          <span className="text-[15px] font-medium">{likes}</span>
         </button>
 
         <button
           onClick={() => setComments(true)}
           aria-label="Комментарии"
-          className="w-11 h-11 grid place-items-center rounded-full hover:bg-[#f1f1f1]"
+          className="flex items-center gap-1 h-11 px-1.5 rounded-full hover:bg-[#f1f1f1]"
         >
           <img src="/icons/comment.svg" alt="" width={28} height={28} />
+          <span className="text-[15px] font-medium">{commentsCount}</span>
         </button>
 
         <button
@@ -132,7 +134,7 @@ export default function PinActions({
 
       <button
         onClick={toggleSave}
-        className={`px-4 h-10 rounded-full text-[14px] font-semibold ${
+        className={`px-4 h-10 rounded-2xl text-[14px] font-semibold ${
           saved ? "bg-ink text-white" : "bg-[#e60023] text-white hover:bg-[#ad081b]"
         }`}
       >

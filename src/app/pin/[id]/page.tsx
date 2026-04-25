@@ -66,7 +66,7 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
         <Link
           href="/feed"
           aria-label="Назад"
-          className="absolute top-2 left-2 z-10 w-12 h-12 grid place-items-center rounded-full bg-white/95 backdrop-blur shadow-md hover:bg-white"
+          className="absolute top-2 left-2 z-10 w-12 h-12 grid place-items-center rounded-2xl bg-white/95 backdrop-blur shadow-md hover:bg-white"
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="#111">
             <path d="M16.752,23.994,6.879,14.121a3,3,0,0,1,0-4.242L16.746.012,18.16,1.426,8.293,11.293a1,1,0,0,0,0,1.414l9.873,9.873Z" />
