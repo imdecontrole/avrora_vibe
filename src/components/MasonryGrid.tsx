@@ -1,9 +1,20 @@
+"use client";
+import Masonry from "react-masonry-css";
 import PinCard, { type PinCardData } from "./PinCard";
 import PostTile, { type PostTileData } from "./PostTile";
 
 export type FeedItem =
   | { kind: "pin"; pin: PinCardData }
   | { kind: "post"; post: PostTileData };
+
+const breakpointCols = {
+  default: 6,
+  1280: 6,
+  1024: 5,
+  768: 4,
+  640: 3,
+  0: 2,
+};
 
 export default function MasonryGrid({
   pins,
@@ -22,8 +33,13 @@ export default function MasonryGrid({
       </div>
     );
   }
+
   return (
-    <div className="masonry px-3">
+    <Masonry
+      breakpointCols={breakpointCols}
+      className="masonry-grid px-3"
+      columnClassName="masonry-col"
+    >
       {list.map((it) =>
         it.kind === "pin" ? (
           <PinCard key={`pin-${it.pin.id}`} pin={it.pin} />
@@ -31,6 +47,6 @@ export default function MasonryGrid({
           <PostTile key={`post-${it.post.id}`} post={it.post} />
         )
       )}
-    </div>
+    </Masonry>
   );
 }
