@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Pin {
+  id           String   @id @default(cuid())
+  title        String
+  description  String?
+  productName  String?
+  productUrl   String?
+  price        Int?
+  sku          String?  @unique
+  externalId   String?  @unique
+  mediaType    String   @default("image") // "image" | "video"
+  mediaUrl     String
+  mediaPublicId String?
+  width        Int?
+  height       Int?
+  createdAt    DateTime @default(now())
+
+  collectionId String?
+  collection   Collection? @relation(fields: [collectionId], references: [id], onDelete: SetNull)
+
+  categoryId   String?
+  category     Category?   @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+
+  likes     Like[]
+  wishlists Wishlist[]
+  views     View[]
+  comments  Comment[]
+  portfolios Portfolio[] @relation("PortfolioPins")
+
+  // Self m2m: a content-pin can "feature" multiple products;
+  // a product can be "featured in" multiple content-pins.
+  featuredProducts Pin[] @relation("PinProducts")
+  featuredIn       Pin[] @relation("PinProducts")
+
+  @@index([createdAt])
+  @@index([categoryId])
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  title     String
+  slug      String   @unique
+  coverUrl  String?
+  coverType String   @default("image")
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  pins      Pin[]
+
+  @@index([order])
+}
+
+model Collection {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  coverUrl    String?
+  createdAt   DateTime @default(now())
+  pins        Pin[]
+}
+
+model Post {
+  id            String   @id @default(cuid())
+  title         String
+  body          String?
+  mediaUrl      String?  // cover media (image or video)
+  mediaType     String?  // "image" | "video" | null
+  bodyMediaUrl  String?  // optional in-body media
+  bodyMediaType String?  // "image" | "video" | null
+  ctaLabel      String?
+  ctaUrl        String?
+  isAd          Boolean  @default(false)
+  createdAt     DateTime @default(now())
+
+  @@index([createdAt])
+}
+
+model Portfolio {
+  id          String   @id @default(cuid())
+  title       String
+  clientName  String?
+  description String?
+  coverUrl    String
+  coverType   String   @default("image") // "image" | "video"
+  createdAt   DateTime @default(now())
+
+  items       PortfolioItem[]
+  pins        Pin[]    @relation("PortfolioPins")
+
+  @@index([createdAt])
+}
+
+model PortfolioItem {
+  id          String   @id @default(cuid())
+  portfolioId String
+  portfolio   Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  mediaUrl    String
+  mediaType   String   @default("image")
+  order       Int      @default(0)
+
+  @@index([portfolioId, order])
+}
+
+model HeroVideo {
+  id        String   @id @default(cuid())
+  title     String?
+  videoUrl  String
+  posterUrl String?
+  mediaType String   @default("video")
+  ctaLabel  String?
+  ctaUrl    String?
+  order     Int      @default(0)
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  @@index([active, order])
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  sessionId String
+  pinId     String
+  pin       Pin      @relation(fields: [pinId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([sessionId, pinId])
+  @@index([sessionId])
+}
+
+model Wishlist {
+  id        String   @id @default(cuid())
+  sessionId String
+  pinId     String
+  pin       Pin      @relation(fields: [pinId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([sessionId, pinId])
+  @@index([sessionId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  sessionId String
+  pinId     String
+  pin       Pin      @relation(fields: [pinId], references: [id], onDelete: Cascade)
+  body      String
+  createdAt DateTime @default(now())
+
+  @@index([pinId, createdAt])
+}
+
+model View {
+  id        String   @id @default(cuid())
+  sessionId String
+  pinId     String
+  pin       Pin      @relation(fields: [pinId], references: [id], onDelete: Cascade)
+  viewedAt  DateTime @default(now())
+
+  @@index([sessionId, viewedAt])
+}

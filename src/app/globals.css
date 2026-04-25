@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  background: rgba(255, 255, 255, 1);
+  color: #111111;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Masonry columns — Pinterest-style */
+.masonry {
+  column-gap: 12px;
+}
+@media (min-width: 0px)    { .masonry { column-count: 2; } }
+@media (min-width: 640px)  { .masonry { column-count: 3; } }
+@media (min-width: 768px)  { .masonry { column-count: 4; } }
+@media (min-width: 1024px) { .masonry { column-count: 5; } }
+@media (min-width: 1280px) { .masonry { column-count: 6; } }
+
+.masonry > * {
+  break-inside: avoid;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Force the first row to equal heights so the feed starts cleanly. */
+.masonry > :nth-child(-n+2) .tile-media { aspect-ratio: 3 / 4 !important; }
+@media (min-width: 640px)  { .masonry > :nth-child(-n+3) .tile-media { aspect-ratio: 3 / 4 !important; } }
+@media (min-width: 768px)  { .masonry > :nth-child(-n+4) .tile-media { aspect-ratio: 3 / 4 !important; } }
+@media (min-width: 1024px) { .masonry > :nth-child(-n+5) .tile-media { aspect-ratio: 3 / 4 !important; } }
+@media (min-width: 1280px) { .masonry > :nth-child(-n+6) .tile-media { aspect-ratio: 3 / 4 !important; } }
+
+
+/* Scrollbars */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+/* Hide bottom-nav underline on active tap */
+button, a { -webkit-tap-highlight-color: transparent; }
