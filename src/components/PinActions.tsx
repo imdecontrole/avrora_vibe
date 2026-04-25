@@ -64,29 +64,27 @@ export default function PinActions({
   }
 
   return (
-    <div className="flex items-center justify-between mt-4 gap-3">
-      <div className="flex items-center gap-2">
+    <div className="flex items-center justify-between mt-2 gap-2">
+      <div className="flex items-center gap-0.5">
         <button
           onClick={toggleLike}
           aria-label="Нравится"
-          className="flex items-center gap-1.5 h-11 px-1 rounded-full hover:bg-[#f1f1f1]"
+          className="w-11 h-11 grid place-items-center rounded-full hover:bg-[#f1f1f1]"
         >
           <img
             src={liked ? "/icons/heart-active.svg" : "/icons/heart-default.svg"}
             alt=""
-            width={26}
-            height={26}
+            width={28}
+            height={28}
           />
-          <span className="text-[15px] font-medium">{likes}</span>
         </button>
 
         <button
           onClick={() => setComments(true)}
           aria-label="Комментарии"
-          className="flex items-center gap-1.5 h-11 px-1 rounded-full hover:bg-[#f1f1f1]"
+          className="w-11 h-11 grid place-items-center rounded-full hover:bg-[#f1f1f1]"
         >
-          <img src="/icons/comment.svg" alt="" width={26} height={26} />
-          <span className="text-[15px] font-medium">{commentsCount}</span>
+          <img src="/icons/comment.svg" alt="" width={28} height={28} />
         </button>
 
         <button
@@ -94,7 +92,7 @@ export default function PinActions({
           aria-label="Поделиться"
           className="w-11 h-11 grid place-items-center rounded-full hover:bg-[#f1f1f1] relative"
         >
-          <img src="/icons/share.svg" alt="" width={26} height={26} />
+          <img src="/icons/share.svg" alt="" width={28} height={28} />
           {copied && (
             <span className="absolute -bottom-7 left-1/2 -translate-x-1/2 text-[11px] bg-ink text-white px-2 py-0.5 rounded-full whitespace-nowrap">
               Ссылка скопирована
@@ -134,7 +132,7 @@ export default function PinActions({
 
       <button
         onClick={toggleSave}
-        className={`px-5 h-11 rounded-2xl text-[15px] font-semibold ${
+        className={`px-4 h-10 rounded-full text-[14px] font-semibold ${
           saved ? "bg-ink text-white" : "bg-[#e60023] text-white hover:bg-[#ad081b]"
         }`}
       >
