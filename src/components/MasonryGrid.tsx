@@ -9,11 +9,10 @@ export type FeedItem =
 
 const breakpointCols = {
   default: 6,
-  1280: 6,
-  1024: 5,
-  768: 4,
-  640: 3,
-  0: 2,
+  1280: 5,
+  1024: 4,
+  768: 3,
+  500: 2,
 };
 
 export default function MasonryGrid({
