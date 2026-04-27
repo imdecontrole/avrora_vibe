@@ -7,14 +7,14 @@ export type FeedItem =
   | { kind: "pin"; pin: PinCardData }
   | { kind: "post"; post: PostTileData };
 
-// Fixed 262px column width (+16px gap = 278px per slot). Max 5 cols (как у Pinterest).
-// Breakpoint = cols × 278 + 200 (sidebar 80px + symmetric right gutter 80px + buffer 40px).
+// Лента: фиксированная ширина пина 238px + 16px gap = 254px на слот. Max 5 колонок.
+// Breakpoint = cols × 254 + 200 (sidebar 80px + symmetric right gutter 80px + buffer 40px).
 // react-masonry-css picks the SMALLEST key >= window.innerWidth.
 const breakpointCols = {
   default: 5,
-  1590: 4,
-  1312: 3,
-  1034: 2,
+  1454: 4, // 5 × 254 + 200 = 1470 → ниже идём в 4
+  1200: 3, // 4 × 254 + 200 = 1216
+  946: 2,  // 3 × 254 + 200 = 962
 };
 
 export default function MasonryGrid({
@@ -44,7 +44,7 @@ export default function MasonryGrid({
           ? { default: cols }
           : cols ?? breakpointCols
       }
-      className="masonry-grid px-3"
+      className={`masonry-grid px-3${typeof cols === "number" ? " masonry-grid--modal" : ""}`}
       columnClassName="masonry-col"
     >
       {list.map((it) =>

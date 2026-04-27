@@ -39,7 +39,12 @@ html, body {
     /* !important нужен, чтобы перебить inline width: X%, который
        react-masonry-css ставит на каждую колонку. Это единственное место
        в проекте, где !important оправдан — боремся с inline-стилем библиотеки. */
-    flex: 0 0 278px !important; /* 262px пин + 16px gap (padding-left выше) */
+    flex: 0 0 254px !important; /* лента: 238px пин + 16px gap (Pinterest standard) */
+    width: 254px !important;
+  }
+  /* Модалка (страница пина): более просторные 262px пины */
+  .masonry-grid--modal .masonry-col {
+    flex: 0 0 278px !important; /* 262px пин + 16px gap */
     width: 278px !important;
   }
 }
