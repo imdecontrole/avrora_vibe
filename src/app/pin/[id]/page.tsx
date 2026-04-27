@@ -58,7 +58,7 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
 
   return (
     <div className="px-2 pt-3 md:px-6 md:pt-6 md:max-w-[1400px] md:mx-auto">
-      <div className="md:grid md:grid-cols-[minmax(0,580px)_minmax(0,1fr)] md:gap-8">
+      <div className="md:grid md:grid-cols-[540px_minmax(0,1fr)] md:gap-4">
         {/* Left column: pin */}
         <div className="flex flex-col">
           {/* Actions on top (desktop) / bottom (mobile) via order */}
@@ -88,7 +88,7 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
           </div>
 
           {/* Image */}
-          <div className="order-1 md:order-2 relative overflow-hidden rounded-pin bg-[#f3f3f3]">
+          <div className="order-1 md:order-2 relative overflow-hidden rounded-pin md:rounded-t-2xl md:rounded-b-none md:border md:border-b-0 md:border-line bg-[#f3f3f3]">
             {pin.mediaType === "video" ? (
               <video src={pin.mediaUrl} controls playsInline className="w-full h-auto" />
             ) : (
@@ -107,7 +107,7 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
           </div>
 
           {/* Info */}
-          <div className="order-3 mt-4">
+          <div className="order-3 mt-4 md:mt-0 md:p-4 md:rounded-b-2xl md:border md:border-t-0 md:border-line md:bg-white">
             <h1 className="text-xl font-semibold">{pin.title}</h1>
             {pin.productName && <div className="mt-1 text-base">{pin.productName}</div>}
             {pin.price != null && (
@@ -132,7 +132,7 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
 
           {/* More related directly below the pin (desktop, 2 cols) */}
           {belowRelated.length > 0 && (
-            <div className="order-4 hidden md:block mt-6">
+            <div className="order-4 hidden md:block mt-4">
               <MasonryGrid pins={belowRelated} cols={2} />
             </div>
           )}
