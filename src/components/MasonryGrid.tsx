@@ -7,12 +7,16 @@ export type FeedItem =
   | { kind: "pin"; pin: PinCardData }
   | { kind: "post"; post: PostTileData };
 
+// Targets ~262px column width (Pinterest standard).
+// Formula: width ≈ 278×cols + 8 (16px gap, 24px masonry x-padding, 80px desktop sidebar)
 const breakpointCols = {
-  default: 6,
-  1280: 5,
-  1024: 4,
-  768: 3,
-  500: 2,
+  default: 8,
+  2200: 7,
+  1920: 6,
+  1640: 5,
+  1360: 4,
+  1080: 3,
+  820: 2,
 };
 
 export default function MasonryGrid({

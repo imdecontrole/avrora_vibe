@@ -35,7 +35,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="ru" className={geologica.variable}>
       <body className="min-h-dvh bg-bg text-ink font-sans">
         <SideNav />
-        <main className="pb-[calc(68px+env(safe-area-inset-bottom))] md:pb-0 md:pl-20">{children}</main>
+        <main className="pb-[calc(68px+env(safe-area-inset-bottom))] md:pb-0">{children}</main>
         <BottomNav />
       </body>
     </html>

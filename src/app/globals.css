@@ -12,7 +12,9 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Masonry — react-masonry-css, row-by-row placement */
+/* Masonry — react-masonry-css, row-by-row placement.
+   Mobile-first base: гибкие колонки (50% / 33% и т.д. от viewport),
+   ширину каждой колонки определяет сам react-masonry-css inline-стилем. */
 .masonry-grid {
   display: flex;
   margin-left: -16px;
@@ -25,6 +27,21 @@ html, body {
 .masonry-col > * {
   margin-bottom: 16px;
   display: block;
+}
+
+/* Desktop (≥768px): фиксированная ширина колонки 262px (Pinterest-стандарт),
+   masonry центрируется по viewport. Только дополняем — ничего не переопределяем. */
+@media (min-width: 768px) {
+  .masonry-grid {
+    justify-content: center;
+  }
+  .masonry-col {
+    /* !important нужен, чтобы перебить inline width: X%, который
+       react-masonry-css ставит на каждую колонку. Это единственное место
+       в проекте, где !important оправдан — боремся с inline-стилем библиотеки. */
+    flex: 0 0 278px !important; /* 262px пин + 16px gap (padding-left выше) */
+    width: 278px !important;
+  }
 }
 
 
