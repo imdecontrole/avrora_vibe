@@ -51,8 +51,10 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
   const shareUrl = `${proto}://${host}/pin/${id}`;
 
   const relatedCards: PinCardData[] = related.map((p) => ({ ...p }));
-  const sideRelated = relatedCards.slice(0, 8);
-  const belowRelated = relatedCards.slice(8);
+  // Split related: half on the right of the pin, half directly below it.
+  const half = Math.ceil(relatedCards.length / 2);
+  const sideRelated = relatedCards.slice(0, half);
+  const belowRelated = relatedCards.slice(half);
 
   return (
     <div className="px-2 pt-3 md:px-6 md:pt-6 md:max-w-[1400px] md:mx-auto">
@@ -127,6 +129,13 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
               </a>
             )}
           </div>
+
+          {/* More related directly below the pin (desktop, 2 cols) */}
+          {belowRelated.length > 0 && (
+            <div className="order-4 hidden md:block mt-6">
+              <MasonryGrid pins={belowRelated} cols={2} />
+            </div>
+          )}
         </div>
 
         {/* Right column: related (desktop) */}
@@ -144,12 +153,6 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
         </section>
       )}
 
-      {/* More related below the pin on desktop (full width) */}
-      {belowRelated.length > 0 && (
-        <section className="hidden md:block mt-10 -mx-6">
-          <MasonryGrid pins={belowRelated} />
-        </section>
-      )}
     </div>
   );
 }
