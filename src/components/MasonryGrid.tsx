@@ -18,9 +18,11 @@ const breakpointCols = {
 export default function MasonryGrid({
   pins,
   items,
+  cols,
 }: {
   pins?: PinCardData[];
   items?: FeedItem[];
+  cols?: number | { default: number; [bp: number]: number };
 }) {
   const list: FeedItem[] =
     items ?? (pins ?? []).map((p) => ({ kind: "pin" as const, pin: p }));
@@ -35,7 +37,11 @@ export default function MasonryGrid({
 
   return (
     <Masonry
-      breakpointCols={breakpointCols}
+      breakpointCols={
+        typeof cols === "number"
+          ? { default: cols }
+          : cols ?? breakpointCols
+      }
       className="masonry-grid px-3"
       columnClassName="masonry-col"
     >

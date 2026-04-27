@@ -130,8 +130,7 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
         {/* Right column: related (desktop) */}
         {relatedCards.length > 0 && (
           <aside className="hidden md:block">
-            <h2 className="px-3 mb-3 text-base font-semibold">Другие интересные пины</h2>
-            <MasonryGrid pins={relatedCards} />
+            <MasonryGrid pins={relatedCards} cols={2} />
           </aside>
         )}
       </div>
