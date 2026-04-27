@@ -7,16 +7,14 @@ export type FeedItem =
   | { kind: "pin"; pin: PinCardData }
   | { kind: "post"; post: PostTileData };
 
-// Targets ~262px column width (Pinterest standard).
-// Formula: width ≈ 278×cols + 8 (16px gap, 24px masonry x-padding, 80px desktop sidebar)
+// Fixed 262px column width (+16px gap = 278px per slot). Max 5 cols (как у Pinterest).
+// Breakpoint = cols × 278 + 200 (sidebar 80px + symmetric right gutter 80px + buffer 40px).
+// react-masonry-css picks the SMALLEST key >= window.innerWidth.
 const breakpointCols = {
-  default: 8,
-  2200: 7,
-  1920: 6,
-  1640: 5,
-  1360: 4,
-  1080: 3,
-  820: 2,
+  default: 5,
+  1590: 4,
+  1312: 3,
+  1034: 2,
 };
 
 export default function MasonryGrid({
