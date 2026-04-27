@@ -37,7 +37,7 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
         ...(pin.collectionId ? { collectionId: pin.collectionId } : {}),
       },
       orderBy: { createdAt: "desc" },
-      take: 30,
+      take: 80,
     }),
   ]);
 
@@ -51,6 +51,8 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
   const shareUrl = `${proto}://${host}/pin/${id}`;
 
   const relatedCards: PinCardData[] = related.map((p) => ({ ...p }));
+  const sideRelated = relatedCards.slice(0, 8);
+  const belowRelated = relatedCards.slice(8);
 
   return (
     <div className="px-2 pt-3 md:px-6 md:pt-6 md:max-w-[1400px] md:mx-auto">
@@ -130,7 +132,7 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
         {/* Right column: related (desktop) */}
         {relatedCards.length > 0 && (
           <aside className="hidden md:block">
-            <MasonryGrid pins={relatedCards} cols={2} />
+            <MasonryGrid pins={sideRelated} cols={2} />
           </aside>
         )}
       </div>
@@ -138,8 +140,14 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
       {/* Related on mobile (below) */}
       {relatedCards.length > 0 && (
         <section className="md:hidden mt-10 -mx-2">
-          <h2 className="px-4 mb-3 text-lg font-semibold">Другие интересные пины</h2>
           <MasonryGrid pins={relatedCards} />
+        </section>
+      )}
+
+      {/* More related below the pin on desktop (full width) */}
+      {belowRelated.length > 0 && (
+        <section className="hidden md:block mt-10 -mx-6">
+          <MasonryGrid pins={belowRelated} />
         </section>
       )}
     </div>
