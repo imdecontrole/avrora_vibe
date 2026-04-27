@@ -57,8 +57,8 @@ export default async function PinPage({ params }: { params: Promise<{ id: string
   const belowRelated = relatedCards.slice(half);
 
   return (
-    <div className="px-2 pt-3 md:px-6 md:pt-6 md:max-w-[1400px] md:mx-auto">
-      <div className="md:grid md:grid-cols-[540px_minmax(0,1fr)] md:gap-4">
+    <div className="px-2 pt-3 md:px-6 md:pt-6 md:w-[1096px] md:max-w-full md:mx-auto">
+      <div className="md:grid md:grid-cols-[540px_540px] md:gap-4 md:justify-center">
         {/* Left column: pin */}
         <div className="flex flex-col">
           {/* Actions on top (desktop) / bottom (mobile) via order */}
