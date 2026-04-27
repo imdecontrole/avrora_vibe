@@ -2,6 +2,7 @@ import "./globals.css";
 import type { Metadata, Viewport } from "next";
 import { Geologica } from "next/font/google";
 import BottomNav from "@/components/BottomNav";
+import SideNav from "@/components/SideNav";
 
 const geologica = Geologica({
   subsets: ["latin", "cyrillic"],
@@ -33,7 +34,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang="ru" className={geologica.variable}>
       <body className="min-h-dvh bg-bg text-ink font-sans">
-        <main className="pb-[calc(68px+env(safe-area-inset-bottom))]">{children}</main>
+        <SideNav />
+        <main className="pb-[calc(68px+env(safe-area-inset-bottom))] md:pb-0 md:pl-20">{children}</main>
         <BottomNav />
       </body>
     </html>
